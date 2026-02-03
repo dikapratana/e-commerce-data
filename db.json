@@ -1,0 +1,135 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "code": "CS123",
+      "name": "Dika",
+      "email": "dika@mail.com",
+      "noTelp": "08145688988",
+      "provider": "xl_axiata",
+      "providerName": "XL Axiata",
+      "isActive": true,
+      "createdAt": "2026-02-02T10:15:30.123Z"
+    },
+    {
+      "id": "2",
+      "code": "CS123",
+      "name": "Dika",
+      "email": "dika@mail.com",
+      "noTelp": "08145688988",
+      "provider": "xl_axiata",
+      "providerName": "XL Axiata",
+      "isActive": false,
+      "createdAt": "2026-02-03T10:15:30.123Z"
+    },
+    {
+      "id": "3",
+      "code": "CS123",
+      "name": "Dika",
+      "email": "dika@mail.com",
+      "noTelp": "08145688988",
+      "provider": "xl_axiata",
+      "providerName": "XL Axiata",
+      "isActive": false,
+      "createdAt": "2026-02-01T10:15:30.123Z"
+    }
+  ],
+
+  "providers": [
+    { "value": "telkomsel", "label": "Telkomsel" },
+    {
+      "value": "indosat_ooredoo_hutchison",
+      "label": "Indosat Ooredoo Hutchison (termasuk IM3/Tri)"
+    },
+    { "value": "xl_axiata", "label": "XL Axiata" },
+    { "value": "axis", "label": "Axis" },
+    { "value": "smartfren", "label": "Smartfren" },
+    { "value": "biznet", "label": "Biznet" },
+    { "value": "indihome", "label": "IndiHome" },
+    { "value": "first_media", "label": "First Media" },
+    { "value": "myrepublic", "label": "MyRepublic" },
+    { "value": "cbn_internet", "label": "CBN Internet" }
+  ],
+  "packages": [
+    {
+      "id": "1",
+      "provider": "telkomsel",
+      "name": "Telkomsel Combo 10GB",
+      "quota": 10,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 20000,
+      "category": "bulanan",
+      "description": "Kuota utama 10GB semua jaringan 24 jam",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "provider": "indosat_ooredoo_hutchison",
+      "name": "IM3 Freedom 15GB",
+      "quota": 15,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 25000,
+      "category": "bulanan",
+      "description": "Kuota utama 15GB tanpa pembagian zona",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "provider": "xl_axiata",
+      "name": "XL Xtra Combo 8GB",
+      "quota": 8,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 18000,
+      "category": "bulanan",
+      "description": "Kuota utama 8GB + akses aplikasi populer",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "provider": "axis",
+      "name": "AXIS Bronet 5GB",
+      "quota": 5,
+      "quotaUnit": "GB",
+      "validity": 15,
+      "price": 12000,
+      "category": "mingguan",
+      "description": "Kuota 5GB semua jaringan",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "provider": "smartfren",
+      "name": "Smartfren Unlimited Lite",
+      "quota": 999,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 30000,
+      "category": "bulanan",
+      "description": "Unlimited FUP 1GB/hari kecepatan normal",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "provider": "byu",
+      "name": "by.U 6GB",
+      "quota": 6,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 15000,
+      "category": "bulanan",
+      "description": "Kuota utama fleksibel tanpa pembagian waktu",
+      "isActive": true,
+      "createdAt": "2026-02-03T10:00:00.000Z"
+    }
+  ],
+
+  "transactions": []
+}

@@ -1,0 +1,3 @@
+type SideMenuProps = {
+  collapsed: boolean;
+};

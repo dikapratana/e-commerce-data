@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+.dataTable :global(th.ant-table-cell) {
+  @apply text-neutral-800! text-xs! font-medium! p-2.5! bg-neutral-100!;
+}
+
+.dataTable :global(th.ant-table-cell::before) {
+  @apply hidden;
+}
+
+.dataTable :global(td.ant-table-cell) {
+  @apply text-neutral-800! text-xs! font-normal! p-2.5!;
+}
+.dataTable :global(tr:last-child td.ant-table-cell) {
+  @apply border-none!;
+}

@@ -1,0 +1,17 @@
+@reference "tailwindcss";
+
+.sideMenu {
+  @apply shadow-lg;
+}
+
+.sideMenu :global(.ant-menu-item) {
+  @apply w-full rounded-none mb-1! font-medium flex gap-2 justify-center;
+  margin: 0;
+}
+
+.sideMenu
+  :global(
+    .ant-menu.ant-menu-inline-collapsed .ant-menu-item .ant-menu-title-content
+  ) {
+  display: none;
+}
