@@ -1,7 +1,14 @@
 import { createRoute, lazyRouteComponent } from "@tanstack/react-router";
 import { rootRoute } from "./root.route";
+import { getToken } from "../utils/token";
 
 export const guardRoute = createRoute({
+  beforeLoad: () => {
+    const token = getToken();
+    if (!token) {
+      window.location.href = "/login";
+    }
+  },
   getParentRoute: () => rootRoute,
   id: "general",
   component: lazyRouteComponent(

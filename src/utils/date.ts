@@ -5,5 +5,5 @@ dayjs.locale("id");
 
 export const dateFormat = (isoDate: string, patern?: string) => {
   if (!isoDate) return "-";
-  return dayjs(isoDate).format(patern ?? "DD MMMM YYYY"); // contoh: 01 Maret 2026
+  return dayjs(isoDate).format(patern ?? "DD MMMM YYYY");
 };

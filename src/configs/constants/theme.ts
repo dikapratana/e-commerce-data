@@ -2,18 +2,15 @@ export const THEME = {
   token: {
     fontFamily: "Roboto, sans-serif",
 
-    // Primary Brand
-    colorPrimary: "#64b0f2", // toska seperti di gambar
-    colorInfo: "#64b0f2", // biru accent
+    colorPrimary: "#64b0f2",
+    colorInfo: "#64b0f2",
     colorSuccess: "#2ecc71",
     colorWarning: "#f1c40f",
     colorError: "#e74c3c",
 
-    // Background
     colorBgLayout: "#f5f7fb",
     colorBgContainer: "#ffffff",
 
-    // Text
     colorTextBase: "#2f3749",
     colorTextSecondary: "#6b7280",
   },
@@ -27,11 +24,9 @@ export const THEME = {
     Menu: {
       darkItemBg: "#2f3749",
 
-      // selected menu
       itemSelectedBg: "#eff7fe",
       itemSelectedColor: "#64b0f2",
 
-      // hover
       itemHoverBg: "#eff7fe",
       itemHoverColor: "#64b0f2",
     },

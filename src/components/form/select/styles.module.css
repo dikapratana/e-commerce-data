@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.select {
+  @apply text-xs! h-8;
+}
+
+.select :global(.ant-select-placeholder) {
+  @apply line-clamp-1 whitespace-normal;
+}

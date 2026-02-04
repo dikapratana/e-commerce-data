@@ -1,4 +1,3 @@
-// constants.ts
 export type ChipType = "success" | "failed" | "pending";
 
 export const colorMap: Record<ChipType, string> = {

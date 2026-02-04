@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getToken, setToken, removeToken } from "../utils/token";
+import { getToken, setToken, removeAuth } from "../utils/token";
 
 type AuthState = {
   token?: string;
@@ -22,7 +22,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: () => {
-    removeToken();
+    removeAuth();
     set({
       token: undefined,
       isAuthenticated: false,

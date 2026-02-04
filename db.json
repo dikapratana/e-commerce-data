@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "u1",
-      "nama": "Admin Sistem",
+      "name": "Admin Sistem",
       "username": "admin",
       "password": "admin123",
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
@@ -13,7 +13,7 @@
       "id": "1770195947551",
       "name": "Jhon Doe",
       "email": "Jhondoe@gmail.com",
-      "noTelp": "081111111111",
+      "noTelp": "0811111111112",
       "provider": "axis",
       "isActive": true,
       "providerName": "Axis",
@@ -273,6 +273,32 @@
       "price": 30000,
       "status": "success",
       "createdAt": "2026-02-04T12:09:22.390Z",
+      "customerNo": "085555",
+      "packageData": {
+        "id": "5",
+        "provider": "smartfren",
+        "name": "Smartfren Unlimited Lite",
+        "quota": 999,
+        "quotaUnit": "GB",
+        "validity": 30,
+        "price": 30000,
+        "description": "Unlimited FUP 1GB/hari kecepatan normal",
+        "isActive": true,
+        "createdAt": "2026-02-03T10:00:00.000Z"
+      }
+    },
+    {
+      "id": "1770219671667",
+      "code": "TRX1770219671667",
+      "customerId": "1770196001314",
+      "customerName": "Jhon Smith",
+      "provider": "smartfren",
+      "providerName": "Smartfren",
+      "packageId": "5",
+      "packageName": "Smartfren Unlimited Lite",
+      "price": 30000,
+      "status": "success",
+      "createdAt": "2026-02-04T15:41:11.667Z",
       "customerNo": "085555",
       "packageData": {
         "id": "5",

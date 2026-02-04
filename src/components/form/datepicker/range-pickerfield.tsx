@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 type RangePickerFieldProps = {
   label: string;
-  value?: RangePickerProps["value"]; // NoUndefinedRangeValueType<Dayjs> | null
+  value?: RangePickerProps["value"];
   onChange?: RangePickerProps["onChange"];
   className?: string;
 } & Omit<RangePickerProps, "value" | "onChange">;

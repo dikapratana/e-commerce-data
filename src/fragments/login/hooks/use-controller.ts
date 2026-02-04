@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useLogin } from "./use-queries";
 import { useAuthStore } from "../../../store/use-auth-store";
 import { useNotify } from "../../../hooks/use-notify";
+import { setUserData } from "../../../utils/token";
 
 export default function useController() {
   const { contextHolder, error } = useNotify();
@@ -33,6 +34,7 @@ export default function useController() {
       onSuccess: (res: LoginData | null) => {
         if (res) {
           setToken(res.token);
+          setUserData(res);
           navigate({
             to: "/",
           });

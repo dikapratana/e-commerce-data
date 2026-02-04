@@ -1,8 +1,13 @@
 import { Layout, Menu } from "antd";
-import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import {
+  ShopFilled,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 
 import { useNavigate, useLocation } from "@tanstack/react-router";
 import styles from "./styles.module.css";
+import { useScreen } from "../../hooks/useScreen";
 
 const { Sider } = Layout;
 
@@ -10,6 +15,7 @@ export default function SideMenu({ collapsed }: SideMenuProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const activeKey = `/${location.pathname.split("/")[1]}`;
+  const { isMobile } = useScreen();
 
   const menuItems = [
     {
@@ -27,12 +33,15 @@ export default function SideMenu({ collapsed }: SideMenuProps) {
   return (
     <Sider
       className={styles.sideMenu}
-      trigger={null}
       collapsible
       theme="light"
       collapsed={collapsed}
+      {...(isMobile ? { collapsedWidth: 0 } : {})}
     >
-      <div className="p-4 h-16">Logo</div>
+      <div className="p-4 h-16 flex justify-center text-neutral-600 text-xl items-center gap-2">
+        <ShopFilled />
+        {!collapsed && <span className="text-sm font-medium">E-Commerce</span>}
+      </div>
       <Menu
         mode="inline"
         theme="light"

@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .datepicker :global(.ant-picker) {
-  @apply h-8;
+  @apply h-8 w-full;
 }
 .datepicker :global(.ant-picker-input > input) {
   @apply text-xs!;

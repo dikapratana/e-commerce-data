@@ -1,6 +1,7 @@
 import { Flex, Select } from "antd";
 import type { SelectProps } from "antd";
 import type { DefaultOptionType } from "antd/es/select";
+import styles from "./styles.module.css";
 
 type SelectFieldProps = {
   label: string;
@@ -29,10 +30,10 @@ const SelectField = ({
   return (
     <div className={className}>
       <Flex vertical gap={4}>
-        <label className="text-sm font-medium">{label}</label>
+        <label className="text-sm font-medium line-clamp-1">{label}</label>
 
         <Select
-          className="text-xs! h-8"
+          className={styles.select}
           showSearch={showSearch}
           allowClear
           options={options}

@@ -9,13 +9,25 @@ import { Avatar, Button, Dropdown, Flex, Layout, type MenuProps } from "antd";
 import SideMenu from "../sidemenu";
 import { Outlet, useNavigate } from "@tanstack/react-router";
 import { useAuthStore } from "../../store/use-auth-store";
+import { useScreen } from "../../hooks/useScreen";
+import { getUserData } from "../../utils/token";
 
 const { Header, Content } = Layout;
 
 const GuardLayout: React.FC = () => {
+  const { isMobile } = useScreen();
   const navigate = useNavigate();
   const { logout } = useAuthStore();
-  const [collapsed, setCollapsed] = useState(false);
+  const user = getUserData();
+  const [collapsed, setCollapsed] = useState(isMobile ? true : false);
+
+  React.useEffect(() => {
+    if (isMobile) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  }, [isMobile]);
 
   const items: MenuProps["items"] = [
     {
@@ -37,7 +49,7 @@ const GuardLayout: React.FC = () => {
 
   return (
     <Layout className="h-screen">
-      <SideMenu collapsed={collapsed} />
+      <SideMenu collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout>
         <Header className="bg-white! h-16! px-4! items-center!">
           <Flex
@@ -61,7 +73,7 @@ const GuardLayout: React.FC = () => {
               >
                 <Avatar size={25} />
                 <span className="text-sm font-medium text-neutral-800">
-                  Jhon Doe
+                  {user?.name}
                 </span>
                 <CaretDownOutlined />
               </Flex>

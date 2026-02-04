@@ -5,7 +5,7 @@ type LoginPayload = {
 
 type LoginData = {
   id: string;
-  nama: string;
+  name: string;
   username: string;
   password: string;
   token: string;
