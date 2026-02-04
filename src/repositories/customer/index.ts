@@ -20,3 +20,27 @@ export const getCustomer = async (
   }
   return data;
 };
+
+export const addCustomer = async (
+  payload?: CustomerPayload,
+): Promise<CustomerData[]> => {
+  const res = await api.post("/customers", payload);
+  return res.data;
+};
+
+export const deleteCustomer = async (id: string): Promise<void> => {
+  await api.delete(`/customers/${id}`);
+};
+
+export const getCustomerById = async (id: string): Promise<CustomerData> => {
+  const res = await api.get(`/customers/${id}`);
+  return res.data;
+};
+
+export const editCustomer = async (
+  payload: Partial<CustomerPayload>,
+): Promise<CustomerData> => {
+  const { id, ..._payload } = payload;
+  const res = await api.patch(`/customers/${id}`, _payload);
+  return res.data;
+};

@@ -6,6 +6,18 @@ type CustomerParams = {
   provider?: string;
 };
 
+type CustomerPayload = {
+  id?: string;
+  code?: string;
+  name?: string;
+  email?: string;
+  noTelp?: string;
+  provider?: string;
+  providerName?: string;
+  isActive?: boolean;
+  createdAt?: string;
+};
+
 type CustomerData = {
   id: string;
   code: string;

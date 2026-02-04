@@ -1,54 +1,89 @@
 {
-  "customers": [
+  "users": [
     {
-      "id": "1",
-      "code": "CS123",
-      "name": "Dika",
-      "email": "dika@mail.com",
-      "noTelp": "08145688988",
-      "provider": "xl_axiata",
-      "providerName": "XL Axiata",
-      "isActive": true,
-      "createdAt": "2026-02-02T10:15:30.123Z"
-    },
-    {
-      "id": "2",
-      "code": "CS123",
-      "name": "Dika",
-      "email": "dika@mail.com",
-      "noTelp": "08145688988",
-      "provider": "xl_axiata",
-      "providerName": "XL Axiata",
-      "isActive": false,
-      "createdAt": "2026-02-03T10:15:30.123Z"
-    },
-    {
-      "id": "3",
-      "code": "CS123",
-      "name": "Dika",
-      "email": "dika@mail.com",
-      "noTelp": "08145688988",
-      "provider": "xl_axiata",
-      "providerName": "XL Axiata",
-      "isActive": false,
-      "createdAt": "2026-02-01T10:15:30.123Z"
+      "id": "u1",
+      "nama": "Admin Sistem",
+      "username": "admin",
+      "password": "admin123",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
     }
   ],
-
+  "customers": [
+    {
+      "id": "1770195947551",
+      "name": "Jhon Doe",
+      "email": "Jhondoe@gmail.com",
+      "noTelp": "081111111111",
+      "provider": "axis",
+      "isActive": true,
+      "providerName": "Axis",
+      "createdAt": "2026-02-04T09:05:47.551Z",
+      "code": "CS1770195947551"
+    },
+    {
+      "id": "1770196001314",
+      "name": "Jhon Smith",
+      "email": "jhonSmith@gmail.com",
+      "noTelp": "085555",
+      "provider": "smartfren",
+      "isActive": true,
+      "providerName": "Smartfren",
+      "createdAt": "2026-02-04T09:06:41.314Z",
+      "code": "CS1770196001314"
+    },
+    {
+      "id": "1770196175121",
+      "name": "Jhin cena",
+      "email": "Jhoncena@gmail.com",
+      "noTelp": "085555555",
+      "provider": "smartfren",
+      "isActive": false,
+      "providerName": "Smartfren",
+      "createdAt": "2026-02-04T09:09:35.121Z",
+      "code": "CS1770196175121"
+    }
+  ],
   "providers": [
-    { "value": "telkomsel", "label": "Telkomsel" },
+    {
+      "value": "telkomsel",
+      "label": "Telkomsel"
+    },
     {
       "value": "indosat_ooredoo_hutchison",
       "label": "Indosat Ooredoo Hutchison (termasuk IM3/Tri)"
     },
-    { "value": "xl_axiata", "label": "XL Axiata" },
-    { "value": "axis", "label": "Axis" },
-    { "value": "smartfren", "label": "Smartfren" },
-    { "value": "biznet", "label": "Biznet" },
-    { "value": "indihome", "label": "IndiHome" },
-    { "value": "first_media", "label": "First Media" },
-    { "value": "myrepublic", "label": "MyRepublic" },
-    { "value": "cbn_internet", "label": "CBN Internet" }
+    {
+      "value": "xl_axiata",
+      "label": "XL Axiata"
+    },
+    {
+      "value": "axis",
+      "label": "Axis"
+    },
+    {
+      "value": "smartfren",
+      "label": "Smartfren"
+    },
+    {
+      "value": "biznet",
+      "label": "Biznet"
+    },
+    {
+      "value": "indihome",
+      "label": "IndiHome"
+    },
+    {
+      "value": "first_media",
+      "label": "First Media"
+    },
+    {
+      "value": "myrepublic",
+      "label": "MyRepublic"
+    },
+    {
+      "value": "cbn_internet",
+      "label": "CBN Internet"
+    }
   ],
   "packages": [
     {
@@ -59,7 +94,6 @@
       "quotaUnit": "GB",
       "validity": 30,
       "price": 20000,
-      "category": "bulanan",
       "description": "Kuota utama 10GB semua jaringan 24 jam",
       "isActive": true,
       "createdAt": "2026-02-03T10:00:00.000Z"
@@ -72,7 +106,6 @@
       "quotaUnit": "GB",
       "validity": 30,
       "price": 25000,
-      "category": "bulanan",
       "description": "Kuota utama 15GB tanpa pembagian zona",
       "isActive": true,
       "createdAt": "2026-02-03T10:00:00.000Z"
@@ -85,7 +118,6 @@
       "quotaUnit": "GB",
       "validity": 30,
       "price": 18000,
-      "category": "bulanan",
       "description": "Kuota utama 8GB + akses aplikasi populer",
       "isActive": true,
       "createdAt": "2026-02-03T10:00:00.000Z"
@@ -98,7 +130,6 @@
       "quotaUnit": "GB",
       "validity": 15,
       "price": 12000,
-      "category": "mingguan",
       "description": "Kuota 5GB semua jaringan",
       "isActive": true,
       "createdAt": "2026-02-03T10:00:00.000Z"
@@ -111,25 +142,150 @@
       "quotaUnit": "GB",
       "validity": 30,
       "price": 30000,
-      "category": "bulanan",
       "description": "Unlimited FUP 1GB/hari kecepatan normal",
       "isActive": true,
       "createdAt": "2026-02-03T10:00:00.000Z"
     },
     {
       "id": "6",
-      "provider": "byu",
-      "name": "by.U 6GB",
-      "quota": 6,
+      "provider": "biznet",
+      "name": "Biznet Home Internet 0D",
+      "quota": 999,
       "quotaUnit": "GB",
       "validity": 30,
-      "price": 15000,
-      "category": "bulanan",
-      "description": "Kuota utama fleksibel tanpa pembagian waktu",
+      "price": 375000,
+      "description": "Kecepatan hingga 50 Mbps, Unlimited",
       "isActive": true,
-      "createdAt": "2026-02-03T10:00:00.000Z"
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "provider": "indihome",
+      "name": "IndiHome Fit 30Mbps",
+      "quota": 999,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 280000,
+      "description": "Internet Cepat Unlimited FUP berlaku",
+      "isActive": true,
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "provider": "first_media",
+      "name": "First Media Joy Value",
+      "quota": 999,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 340000,
+      "description": "Internet 50 Mbps + TV Kabel",
+      "isActive": true,
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "provider": "myrepublic",
+      "name": "MyRepublic Jet 30Mbps",
+      "quota": 999,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 300000,
+      "description": "Internet Full Fiber Unlimited Tanpa FUP",
+      "isActive": true,
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "provider": "cbn_internet",
+      "name": "CBN Fiber 50",
+      "quota": 999,
+      "quotaUnit": "GB",
+      "validity": 30,
+      "price": 299000,
+      "description": "Koneksi Fiber Optik simetris 50 Mbps",
+      "isActive": true,
+      "createdAt": "2026-02-04T10:00:00.000Z"
     }
   ],
-
-  "transactions": []
+  "transactions": [
+    {
+      "id": "1770201045392",
+      "code": "TRX1770201045392",
+      "customerId": "1770195947551",
+      "customerName": "Jhon Doe",
+      "provider": "axis",
+      "providerName": "Axis",
+      "packageId": "4",
+      "packageName": "AXIS Bronet 5GB",
+      "price": 12000,
+      "status": "success",
+      "createdAt": "2026-02-04T10:30:45.392Z",
+      "customerNo": "081111111111",
+      "packageData": {
+        "id": "4",
+        "provider": "axis",
+        "name": "AXIS Bronet 5GB",
+        "quota": 5,
+        "quotaUnit": "GB",
+        "validity": 15,
+        "price": 12000,
+        "category": "mingguan",
+        "description": "Kuota 5GB semua jaringan",
+        "isActive": true,
+        "createdAt": "2026-02-03T10:00:00.000Z"
+      }
+    },
+    {
+      "id": "1770202233509",
+      "code": "TRX1770202233509",
+      "customerId": "1770195947551",
+      "customerName": "Jhon Doe",
+      "provider": "axis",
+      "providerName": "Axis",
+      "packageId": "4",
+      "packageName": "AXIS Bronet 5GB",
+      "price": 12000,
+      "status": "success",
+      "createdAt": "2026-02-04T10:50:33.509Z",
+      "customerNo": "081111111111",
+      "packageData": {
+        "id": "4",
+        "provider": "axis",
+        "name": "AXIS Bronet 5GB",
+        "quota": 5,
+        "quotaUnit": "GB",
+        "validity": 15,
+        "price": 12000,
+        "description": "Kuota 5GB semua jaringan",
+        "isActive": true,
+        "createdAt": "2026-02-03T10:00:00.000Z"
+      }
+    },
+    {
+      "id": "1770206962390",
+      "code": "TRX1770206962390",
+      "customerId": "1770196001314",
+      "customerName": "Jhon Smith",
+      "provider": "smartfren",
+      "providerName": "Smartfren",
+      "packageId": "5",
+      "packageName": "Smartfren Unlimited Lite",
+      "price": 30000,
+      "status": "success",
+      "createdAt": "2026-02-04T12:09:22.390Z",
+      "customerNo": "085555",
+      "packageData": {
+        "id": "5",
+        "provider": "smartfren",
+        "name": "Smartfren Unlimited Lite",
+        "quota": 999,
+        "quotaUnit": "GB",
+        "validity": 30,
+        "price": 30000,
+        "description": "Unlimited FUP 1GB/hari kecepatan normal",
+        "isActive": true,
+        "createdAt": "2026-02-03T10:00:00.000Z"
+      }
+    }
+  ]
 }

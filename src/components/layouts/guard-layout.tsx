@@ -1,30 +1,33 @@
 import React, { useState } from "react";
 import {
   CaretDownOutlined,
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  SettingOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Flex, Layout, type MenuProps } from "antd";
 import SideMenu from "../sidemenu";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useNavigate } from "@tanstack/react-router";
+import { useAuthStore } from "../../store/use-auth-store";
 
 const { Header, Content } = Layout;
 
 const GuardLayout: React.FC = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuthStore();
   const [collapsed, setCollapsed] = useState(false);
 
   const items: MenuProps["items"] = [
     {
-      label: "Profile",
-      key: "1",
-      icon: <UserOutlined />,
-    },
-    {
-      label: "Settings",
+      label: "keluar",
       key: "2",
-      icon: <SettingOutlined />,
+      icon: <LogoutOutlined />,
+      onClick: () => {
+        logout();
+        navigate({
+          to: "/",
+        });
+      },
     },
   ];
 

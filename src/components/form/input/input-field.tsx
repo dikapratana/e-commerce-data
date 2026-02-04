@@ -2,21 +2,26 @@ import { Flex, Input } from "antd";
 import type { InputProps } from "antd";
 
 type InputFieldProps = {
-  label: string;
+  label?: string;
   className?: string;
+  error?: string;
 } & InputProps;
 
 const InputField = ({
   label,
   className = "w-full",
+  error,
   ...props
 }: InputFieldProps) => {
   return (
-    <Flex vertical gap={4} className={className}>
-      <label className="text-sm font-medium">{label}</label>
+    <div className={className}>
+      <Flex vertical gap={4}>
+        {label && <label className="text-sm font-medium">{label}</label>}
 
-      <Input {...props} />
-    </Flex>
+        <Input className="text-xs! h-8" {...props} />
+        {error && <span className="text-xs text-red-500">{error}</span>}
+      </Flex>
+    </div>
   );
 };
 

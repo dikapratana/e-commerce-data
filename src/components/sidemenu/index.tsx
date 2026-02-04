@@ -1,49 +1,46 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-const { Sider } = Layout;
+import { UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+
+import { useNavigate, useLocation } from "@tanstack/react-router";
 import styles from "./styles.module.css";
 
+const { Sider } = Layout;
+
 export default function SideMenu({ collapsed }: SideMenuProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeKey = `/${location.pathname.split("/")[1]}`;
+
+  const menuItems = [
+    {
+      key: "/customer",
+      icon: <UserOutlined />,
+      label: "Customer",
+    },
+    {
+      key: "/transaction",
+      icon: <VideoCameraOutlined />,
+      label: "Transaksi",
+    },
+  ];
+
   return (
     <Sider
+      className={styles.sideMenu}
       trigger={null}
       collapsible
       theme="light"
       collapsed={collapsed}
-      className={styles.sideMenu}
     >
-      <div className="p-4  h-16">Logo</div>
-      <p
-        className={`px-4 py-2 ${!collapsed ? "opacity-100" : "opacity-0"} transition ease-in duration-400`}
-      >
-        Navigation
-      </p>
+      <div className="p-4 h-16">Logo</div>
       <Menu
-        theme="light"
-        className="border-none! border-neutral-50 "
         mode="inline"
-        defaultSelectedKeys={["1"]}
-        items={[
-          {
-            key: "1",
-            icon: <UserOutlined />,
-            label: "Customer",
-          },
-          {
-            key: "2",
-            icon: <VideoCameraOutlined />,
-            label: "nav 2",
-          },
-          {
-            key: "3",
-            icon: <UploadOutlined />,
-            label: "nav 3",
-          },
-        ]}
+        theme="light"
+        selectedKeys={[activeKey]}
+        items={menuItems}
+        onClick={({ key }) => {
+          navigate({ to: key });
+        }}
       />
     </Sider>
   );

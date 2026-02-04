@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCustomer } from "../../../../repositories/customer";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { deleteCustomer, getCustomer } from "../../../../repositories/customer";
 import { getProvider } from "../../../../repositories/provider";
 
 export function useCustomers(params: CustomerParams) {
@@ -20,11 +20,22 @@ export function useProviders() {
   const result = useQuery({
     queryKey: ["customers/provider"],
     queryFn: () => getProvider(),
+    gcTime: 0,
   });
 
   return {
     ...result,
     ...result.data,
+    data: result.data,
+  };
+}
+
+export function useDeleteCustomer() {
+  const result = useMutation({
+    mutationFn: deleteCustomer,
+  });
+  return {
+    ...result,
     data: result.data,
   };
 }

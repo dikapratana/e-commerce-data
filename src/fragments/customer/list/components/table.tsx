@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Space, Tooltip } from "antd";
 import type { TableProps } from "antd";
 import DataTable from "../../../../components/table/data-table";
 import { useMemo } from "react";
-import { DeleteFilled, EditFilled, EyeFilled } from "@ant-design/icons";
 import { dateFormat } from "../../../../utils/date";
+import Action from "./action";
+import Chip from "../../../../components/chip/chip";
 
 const CustomerTable = (props: CustomerController) => {
   const { customer } = props;
@@ -45,43 +44,27 @@ const CustomerTable = (props: CustomerController) => {
         key: "noTelp",
       },
       {
+        title: "Status",
+        dataIndex: "isActive",
+        key: "isActive",
+        render: (value) => (
+          <Chip
+            status={value ? "success" : "failed"}
+            text={value ? "Aktif" : "Tidak Aktif"}
+          />
+        ),
+      },
+      {
         title: "Action",
         key: "action",
         width: "10%",
         render: (value, record: CustomerData) => (
-          <Space data-value={value}>
-            <Tooltip placement="top" title="Detail">
-              <Button
-                type="primary"
-                className="cursor-pointer text-white bg-yellow-400! text-xs! rounded! h-6! w-6! p-0! flex justify-center items-center"
-              >
-                <EyeFilled />
-              </Button>
-            </Tooltip>
-            <Tooltip placement="top" title="Edit">
-              <Button
-                type="primary"
-                className="cursor-pointer text-white bg-emerald-400! text-xs! rounded! h-6! w-6! p-0! flex justify-center items-center"
-              >
-                <EditFilled />
-              </Button>
-            </Tooltip>
-
-            <Tooltip placement="top" title="Hapus">
-              <Button
-                type="primary"
-                className="cursor-pointer text-white bg-red-400! text-xs! rounded! h-6! w-6! p-0! flex justify-center items-center"
-              >
-                <DeleteFilled />
-              </Button>
-            </Tooltip>
-          </Space>
+          <Action value={value} record={record} controller={props} />
         ),
       },
     ],
-    [],
+    [props],
   );
-  console.log(customer?.data);
 
   return (
     <DataTable<CustomerData>

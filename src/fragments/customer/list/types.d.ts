@@ -9,4 +9,21 @@ type CustomerController = {
     isLoading: boolean;
   };
   onChangeParams: (params: CustomerParams) => void;
+  navigate: AnyRouter;
+  delete: {
+    confirm: (val: CustomerData) => void;
+    cancel: () => void;
+    holder: React.ReactNode;
+    loading: boolean;
+  };
+  snackbar: {
+    contextHolder: React.ReactNode;
+  };
+  selectedData?: CustomerData;
+};
+
+type ActionProps = {
+  value: string;
+  record: CustomerData;
+  controller: CustomerController;
 };

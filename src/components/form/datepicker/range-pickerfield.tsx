@@ -1,5 +1,6 @@
 import { Flex, DatePicker } from "antd";
 import type { RangePickerProps } from "antd/es/date-picker";
+import styles from "./styles.module.css";
 
 type RangePickerFieldProps = {
   label: string;
@@ -19,7 +20,13 @@ const RangePickerField = ({
     <Flex className="w-full" justify="space-between" align="end" gap={16}>
       <Flex vertical gap={4} className={className}>
         <label className="text-sm font-medium">{label}</label>
-        <DatePicker.RangePicker value={value} onChange={onChange} {...props} />
+        <div className={styles.datepicker}>
+          <DatePicker.RangePicker
+            value={value}
+            onChange={onChange}
+            {...props}
+          />
+        </div>
       </Flex>
     </Flex>
   );
