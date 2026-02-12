@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panduan Cypress E2E</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --primary: #0f766e;
+        --primary-soft: #ccfbf1;
+        --code-bg: #0b1020;
+        --code-text: #dbeafe;
+        --warn-bg: #fff7ed;
+        --warn-border: #fb923c;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 28px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at top left, #d1fae5 0%, var(--bg) 45%);
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 16px;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      }
+
+      h1, h2, h3 { margin-top: 0; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 20px; margin-bottom: 8px; }
+      h3 { font-size: 16px; margin-bottom: 8px; }
+
+      p, li {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      pre {
+        margin: 10px 0;
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 10px;
+        padding: 14px;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: Consolas, Monaco, monospace;
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #134e4a;
+        background: var(--primary-soft);
+        border-radius: 999px;
+        padding: 4px 10px;
+      }
+
+      .warning {
+        background: var(--warn-bg);
+        border-left: 5px solid var(--warn-border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .ok {
+        background: #ecfeff;
+        border-left: 5px solid var(--primary);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Panduan Cypress di Project Ecommerce Paket Data</h1>
+      <p>
+        Dokumen ini menjelaskan setup <strong>Cypress E2E</strong> dari nol sampai contoh test
+        login yang stabil.
+      </p>
+      <p><span class="badge">Konteks: Vite + React + TanStack Router + json-server</span></p>
+
+      <div class="card">
+        <h2>1. Install Cypress</h2>
+        <pre><code>npm install -D cypress</code></pre>
+        <p>Jika sudah terinstall, langkah ini boleh dilewati.</p>
+      </div>
+
+      <div class="card">
+        <h2>2. Inisialisasi Struktur Folder</h2>
+        <p>Jalankan sekali untuk generate folder default:</p>
+        <pre><code>npx cypress open</code></pre>
+        <p>Struktur minimal yang dipakai di repo ini:</p>
+        <pre><code>cypress.config.ts
+cypress/
+  e2e/
+    login.cy.ts
+  support/
+    e2e.ts
+    commands.ts</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>3. Konfigurasi <code>cypress.config.ts</code></h2>
+        <pre><code>import { defineConfig } from "cypress";
+
+export default defineConfig({
+  allowCypressEnv: false,
+  e2e: {
+    baseUrl: "http://localhost:5173",
+    supportFile: "cypress/support/e2e.ts",
+  },
+});</code></pre>
+        <p>
+          Dengan <code>baseUrl</code>, kamu cukup pakai <code>cy.visit("/login")</code> di test.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>4. Tambahkan Script NPM (opsional tapi disarankan)</h2>
+        <pre><code>{
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  }
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>5. Menjalankan Aplikasi Sebelum E2E</h2>
+        <p>Cypress butuh frontend berjalan. Untuk skenario login ini, backend bisa dimock intercept.</p>
+        <pre><code># terminal 1
+npm run dev
+
+# terminal 2 (opsional kalau tidak mock API)
+npm run server
+
+# terminal 3
+npm run cypress:open
+# atau
+npm run cypress:run</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>6. Contoh Test Login (Sesuai Codebase Ini)</h2>
+        <h3>File: <code>cypress/e2e/login.cy.ts</code></h3>
+        <pre><code>describe("Login Page", () =&gt; {
+  beforeEach(() =&gt; {
+    cy.clearCookies();
+    cy.visit("/login");
+  });
+
+  it("should render login form", () =&gt; {
+    cy.contains("h4", "Masuk Ke E-Commerce").should("be.visible");
+    cy.get('input[name="username"]').should("be.visible");
+    cy.get('input[name="password"]').should("be.visible");
+    cy.get("#login").should("be.visible");
+  });
+
+  it("should login successfully and redirect to customer page", () =&gt; {
+    cy.intercept("GET", "**/users?username=admin&amp;password=admin123", {
+      statusCode: 200,
+      body: [
+        {
+          id: "u1",
+          name: "Admin Sistem",
+          username: "admin",
+          password: "admin123",
+          token: "fake-token-cypress",
+        },
+      ],
+    }).as("loginSuccess");
+
+    cy.get('input[name="username"]').clear().type("admin");
+    cy.get('input[name="password"]').clear().type("admin123");
+    cy.get("#login").click();
+
+    cy.wait("@loginSuccess");
+    cy.url().should("include", "/customer");
+    cy.getCookie("token").should("exist");
+  });
+
+  it("should show error notification when credentials are invalid", () =&gt; {
+    cy.intercept("GET", "**/users?username=admin&amp;password=admin123", {
+      statusCode: 200,
+      body: [],
+    }).as("loginFailed");
+
+    cy.get('input[name="username"]').clear().type("admin");
+    cy.get('input[name="password"]').clear().type("admin123");
+    cy.get("#login").click();
+
+    cy.wait("@loginFailed");
+    cy.contains("Username atau Password salah").should("be.visible");
+    cy.url().should("include", "/login");
+  });
+});</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>7. Kenapa Pakai <code>cy.intercept</code>?</h2>
+        <ul>
+          <li>Test jadi tidak bergantung data real di <code>db.json</code>.</li>
+          <li>Lebih cepat dan stabil (tidak flaky karena backend lambat/down).</li>
+          <li>Mudah menguji skenario sukses dan gagal.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>8. Troubleshooting</h2>
+        <div class="warning">
+          <strong>Elemen tidak ketemu:</strong>
+          <p>Pastikan selector valid, contoh benar: <code>input[name="username"]</code>.</p>
+        </div>
+        <br />
+        <div class="warning">
+          <strong>Langsung redirect tanpa login:</strong>
+          <p>Cookie token lama masih ada. Tambahkan <code>cy.clearCookies()</code> di <code>beforeEach</code>.</p>
+        </div>
+        <br />
+        <div class="warning">
+          <strong>URL assertion gagal:</strong>
+          <p>Gunakan <code>include</code> bukan <code>eq</code> full URL untuk menghindari mismatch trailing slash/query.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>9. Integrasi ke CI (opsional)</h2>
+        <pre><code>npm run build
+npm run dev &amp;
+npm run cypress:run</code></pre>
+        <p>Praktik lebih baik: jalankan frontend lewat server statis hasil build saat CI.</p>
+      </div>
+
+      <p style="text-align:center; color:#64748b; font-size:13px; margin-top:12px;">
+        Dokumentasi internal - Cypress E2E Guide
+      </p>
+    </div>
+  </body>
+</html>

@@ -56,6 +56,7 @@ export default function LoginFragment() {
         />
       </Flex>
       <Button
+        id="login"
         type="primary"
         className=" font-semibold! w-full mt-4"
         disabled={!isValid || loading}
