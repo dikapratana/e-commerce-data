@@ -46,6 +46,7 @@ export default function LoginFragment() {
           prefix={<LockOutlined />}
           suffix={
             <span
+              data-testid="password-action"
               onClick={() => setShowPassword(!showPassword)}
               className="cursor-pointer"
             >
