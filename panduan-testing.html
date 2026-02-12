@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panduan Vitest + RTL</title>
+    <style>
+      :root {
+        --bg: #f4f6fb;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #4b5563;
+        --accent: #0f766e;
+        --accent-soft: #ccfbf1;
+        --code-bg: #0b1020;
+        --code-text: #d1e7ff;
+        --warning-bg: #fff7ed;
+        --warning-border: #fb923c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 28px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: radial-gradient(circle at top left, #e6fffa 0%, var(--bg) 45%);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+        color: #0f172a;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      pre {
+        background: var(--code-bg);
+        color: var(--code-text);
+        border-radius: 12px;
+        padding: 14px;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: "Consolas", "Monaco", monospace;
+      }
+
+      .badge {
+        display: inline-block;
+        background: var(--accent-soft);
+        color: #134e4a;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .warning {
+        background: var(--warning-bg);
+        border-left: 5px solid var(--warning-border);
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      .ok {
+        background: #ecfeff;
+        border-left: 5px solid var(--accent);
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      ul {
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Panduan Testing di Ecommerce Paket Data</h1>
+      <p>
+        Stack testing yang dipakai di project ini: <strong>Vitest</strong> untuk test runner,
+        <strong>React Testing Library</strong> untuk uji perilaku UI, dan
+        <strong>jsdom</strong> untuk simulasi browser.
+      </p>
+      <p><span class="badge">Konteks repo saat ini</span></p>
+
+      <div class="card">
+        <h2>1. Install Dependency</h2>
+        <p>Jalankan perintah ini di root project:</p>
+        <pre><code>npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event</code></pre>
+        <p>Jika ingin coverage report:</p>
+        <pre><code>npm install -D @vitest/coverage-v8</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>2. Konfigurasi Vitest (Poin Paling Penting)</h2>
+        <p>Isi <code>vite.config.ts</code> harus memakai <code>defineConfig</code> dari <code>vitest/config</code> agar properti <code>test</code> dikenali TypeScript.</p>
+        <pre><code>import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/setupTests.ts",
+  },
+});</code></pre>
+        <div class="warning">
+          <strong>Kesalahan umum:</strong>
+          <ul>
+            <li><code>defineConfig</code> diambil dari <code>vite</code>, bukan <code>vitest/config</code></li>
+            <li>salah ketik <code>environment</code> dan <code>setupFiles</code></li>
+            <li>path setup file salah ekstensi (<code>.js</code> padahal file-nya <code>.ts</code>)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>3. Setup Global Matcher RTL</h2>
+        <p>Pastikan ada file <code>src/setupTests.ts</code>:</p>
+        <pre><code>import "@testing-library/jest-dom";</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>4. Script di package.json</h2>
+        <pre><code>{
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage"
+  }
+}</code></pre>
+        <p>Menjalankan test:</p>
+        <pre><code>npm run test:run
+npm run test:run -- src/components/Card/__tests__/cardX.test.tsx</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>5. Pola Wrapper React Query</h2>
+        <p>Codebase ini sudah punya helper di <code>src/utils/test-utils.tsx</code>:</p>
+        <pre><code>import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export function createTestQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+    },
+  });
+}
+
+export function withQueryClient(ui: React.ReactNode) {
+  const testClient = createTestQueryClient();
+  return &lt;QueryClientProvider client={testClient}&gt;{ui}&lt;/QueryClientProvider&gt;;
+}</code></pre>
+        <p><code>retry: false</code> membuat test lebih cepat dan mengurangi flaky.</p>
+      </div>
+
+      <div class="card">
+        <h2>6. Contoh Penerapan di Codebase Ini</h2>
+        <h3>A. Unit test komponen sederhana (CardX)</h3>
+        <pre><code>import { describe, expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import CardX from "../cardX";
+
+vi.mock("@tanstack/react-router", () =&gt; ({
+  useNavigate: () =&gt; vi.fn(),
+}));
+
+describe("CardX", () =&gt; {
+  test("should render title", () =&gt; {
+    render(&lt;CardX title="halo" /&gt;);
+    expect(screen.getByRole("heading", { name: "halo" })).toBeInTheDocument();
+  });
+});</code></pre>
+
+        <h3>B. Komponen dengan React Query (LoginFragment)</h3>
+        <pre><code>import { render } from "@testing-library/react";
+import { vi } from "vitest";
+import LoginFragment from "..";
+import { withQueryClient } from "../../../utils/test-utils";
+
+vi.mock("../hooks/use-queries.ts", () =&gt; ({
+  useLogin: () =&gt; ({ mutate: vi.fn(), isPending: false }),
+}));
+
+render(withQueryClient(&lt;LoginFragment /&gt;));</code></pre>
+      </div>
+
+      <div class="card">
+        <h2>7. Best Practice RTL untuk Repo Ini</h2>
+        <ul>
+          <li>Utamakan query aksesibilitas: <code>getByRole</code>, <code>getByLabelText</code>.</li>
+          <li>Hindari <code>getByTestId</code> kecuali memang tidak ada selector semantik.</li>
+          <li>Mock dependency eksternal (router, repository, query hooks), bukan internal state komponen.</li>
+          <li>Satu test fokus pada satu perilaku agar mudah dilacak saat gagal.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>8. Troubleshooting Cepat</h2>
+        <div class="ok">
+          <strong>Error:</strong> <code>Object literal may only specify known properties, and 'test' does not exist...</code>
+          <p>Solusi: pakai <code>import { defineConfig } from "vitest/config";</code> di <code>vite.config.ts</code>.</p>
+        </div>
+        <br />
+        <div class="ok">
+          <strong>Error:</strong> <code>document is not defined</code>
+          <p>Solusi: pastikan <code>test.environment</code> adalah <code>jsdom</code> dan properti ditulis benar.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>9. Rekomendasi Struktur Folder Test</h2>
+        <pre><code>src/
+  components/
+    Card/
+      __tests__/
+        cardX.test.tsx
+  fragments/
+    login/
+      __tests__/
+        index.test.tsx
+  utils/
+    __tests__/
+      date.test.ts
+      idrFormat.test.ts
+  setupTests.ts
+  utils/test-utils.tsx</code></pre>
+      </div>
+
+      <p style="text-align: center; color: #6b7280; font-size: 13px; margin-top: 14px;">
+        Dokumentasi internal project Ecommerce Paket Data
+      </p>
+    </div>
+  </body>
+</html>
